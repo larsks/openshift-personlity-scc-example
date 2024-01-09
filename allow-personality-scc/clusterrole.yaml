@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: allow-personality-scc
+rules:
+- apiGroups:
+  - security.openshift.io
+  resourceNames:
+  - allow-personality-scc
+  resources:
+  - securitycontextconstraints
+  verbs:
+  - use

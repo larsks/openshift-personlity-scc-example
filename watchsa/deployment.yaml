@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: watchsa
+  annotations:
+    image.openshift.io/triggers: |
+      [
+        {
+          "from": {
+            "kind": "ImageStreamTag",
+            "name": "cli:latest",
+            "namespace": "openshift"
+          },
+          "fieldPath": "spec.template.spec.containers[?(@.name==\"watchsa\")].image"
+        }
+      ]
+spec:
+  replicas: 1
+  template:
+    spec:
+      serviceAccountName: watchsa
+      containers:
+        - image: cli
+          name: watchsa
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          command:
+            - /bin/bash
+            - /scripts/watchsa.sh
+          volumeMounts:
+            - name: watchsa
+              mountPath: /scripts
+      volumes:
+        - name: watchsa
+          configMap:
+            name: watchsa

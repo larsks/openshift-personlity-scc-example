@@ -1,0 +1,24 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: watchsa-manage-rbac
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - serviceaccounts
+  verbs:
+  - list
+  - get
+  - watch
+- apiGroups:
+  - "rbac.authorization.k8s.io"
+  resources:
+  - rolebindings
+  verbs:
+  - list
+  - get
+  - patch
+  - update
+  - delete
+  - create

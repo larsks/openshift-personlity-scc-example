@@ -1,0 +1,6 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- watchsa-allow-personality-scc-rolebinding.yaml
+- watchsa-manage-rbac-role.yaml
+- watchsa-manage-rbac-rolebinding.yaml

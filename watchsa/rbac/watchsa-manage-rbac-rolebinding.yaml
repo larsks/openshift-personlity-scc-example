@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: watchsa-manage-rbac
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: watchsa-manage-rbac
+subjects:
+- kind: ServiceAccount
+  name: watchsa
+  namespace: lars-sandbox

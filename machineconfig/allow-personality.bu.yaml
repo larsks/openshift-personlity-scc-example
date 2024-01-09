@@ -1,0 +1,12 @@
+variant: openshift
+version: 4.10.0
+metadata:
+  name: allow-personality
+  labels:
+    machineconfiguration.openshift.io/role: worker
+storage:
+  files:
+    - path: /var/lib/kubelet/seccomp/allow-personality.json
+      mode: 0644
+      contents:
+        local: allow-personality.json

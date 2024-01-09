@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        openshift.io/required-scc: allow-personality-scc
+    spec:
+      serviceAccountName: example
+      containers:
+        - image: alpine-dev:latest
+          name: alpine-dev
+          volumeMounts:
+            - name: srcs
+              mountPath: /srcs
+          args:
+            - sleep
+            - inf
+          securityContext:
+            seccompProfile:
+              type: Localhost
+              localhostProfile: allow-personality.json
+      volumes:
+        - name: srcs
+          configMap:
+            name: srcs

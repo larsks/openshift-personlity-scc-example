@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: watchsa-allow-personality-scc
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: allow-personality-scc
+subjects:
+- kind: ServiceAccount
+  name: watchsa
+  namespace: lars-sandbox
